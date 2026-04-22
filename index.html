@@ -63,6 +63,9 @@
     cursor: pointer;
     transition: transform 0.2s;
   }
+  .btn2 {
+    background: #ff9500;
+  }
   .btn:hover {
     transform: scale(1.05);
   }
@@ -78,6 +81,13 @@
     font-weight: bold;
     display: none;
   }
+  .hidden-text {
+    display: none;
+    margin-top: 20px;
+    font-size: 17px;
+    color: #222;
+    line-height: 1.8;
+  }
 </style>
 </head>
 
@@ -92,7 +102,7 @@
     愿你新的一岁<br>
     眼里有光，心中有梦<br>
     一路坦荡，万事顺遂<br>
-    平安喜乐，闪闪发光✨
+   平安喜乐，闪闪发光✨
   </div>
 
   <div class="text">
@@ -101,7 +111,15 @@
   </div>
 
   <button class="btn" onclick="celebrate()">点我接收祝福 🎉</button>
+  <button class="btn btn2" onclick="showSecret()">查看专属寄语 💌</button>
+  
   <div id="msg" class="msg"></div>
+  <div id="secret" class="hidden-text">
+    19岁，是闪闪发光的年纪<br>
+    愿单坷钰永远热烈、永远自由<br>
+    所有美好都如期而至，所有愿望都能实现<br>
+    平安顺遂，一生被爱 ❤️
+  </div>
 
   <div class="from">
     From 白月扬 ❤️
@@ -110,12 +128,10 @@
 
 <script>
 function celebrate() {
-  // 变色
   document.body.style.background = "linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)";
   
-  // 祝福文字
   const texts = [
-    "单坷钰，生日快乐！🎂",
+    "单坷钰，19岁生日快乐！🎂",
     "河南帅小伙，越来越帅！",
     "平安喜乐，万事胜意！",
     "前程似锦，一路开挂！✨"
@@ -124,7 +140,6 @@ function celebrate() {
   msg.innerText = texts[Math.floor(Math.random() * texts.length)];
   msg.style.display = "block";
 
-  // 礼花特效
   const emojis = ['🎂', '🎉', '🎈', '🎊', '❤️', '✨', '⭐'];
   for (let i = 0; i < 80; i++) {
     const e = emojis[Math.floor(Math.random() * emojis.length)];
@@ -151,9 +166,14 @@ function celebrate() {
       span.style.transform = `translate(${x}px, ${y}px)`;
       span.style.opacity = 0;
     }, 10);
-
     setTimeout(() => span.remove(), 2000);
   }
+}
+
+// 新增：查看专属寄语
+function showSecret() {
+  const secret = document.getElementById("secret");
+  secret.style.display = "block";
 }
 </script>
 
