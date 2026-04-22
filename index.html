@@ -27,6 +27,8 @@
     width: 100%;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
   }
   h1 {
     font-size: 28px;
@@ -48,6 +50,20 @@
     color: #555;
     margin: 15px 0;
   }
+  .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 24px;
+    background: #ff4d4f;
+    color: #fff;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .btn2 {
+    background: #ff9500;
+  }
   .from {
     margin-top: 30px;
     font-size: 16px;
@@ -60,7 +76,7 @@
 
 <div class="card">
   <div class="emoji">🎉🎂🎈🎊</div>
-  <h1>祝 单坷钰 19岁 生日快乐！</h1>
+  <h1>祝 单坷钰 19岁生日快乐！</h1>
   <h2>河南最帅小伙，岁岁皆胜意</h2>
 
   <div class="text">
@@ -75,10 +91,52 @@
     不止生日快乐，是日日都快乐
   </div>
 
+  <button class="btn" onclick="playSong()">播放生日歌 🎵</button>
+  <button class="btn btn2" onclick="celebrate()">开启祝福特效 🎉</button>
+
   <div class="from">
     来自你最好的朋友 ❤️
   </div>
 </div>
+
+<script>
+function playSong() {
+  let audio = new Audio("https://cdn.pixabay.com/download/audio/2021/01/14/audio_14c1647192.mp3");
+  audio.play();
+}
+
+function celebrate() {
+  for (let i = 0; i < 50; i++) {
+    let emojis = ['🎂', '🎉', '🎈', '🎊', '✨', '❤️'];
+    let e = emojis[Math.floor(Math.random()*emojis.length)];
+    let span = document.createElement('span');
+    span.innerText = e;
+    span.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      font-size: 24px;
+      z-index: 999;
+      pointer-events: none;
+      animation: fall 1.5s linear forwards;
+    `;
+    document.body.appendChild(span);
+
+    let x = (Math.random() - 0.5) * 500;
+    let y = (Math.random() - 0.5) * 500;
+    span.style.setProperty('--x', x + 'px');
+    span.style.setProperty('--y', y + 'px');
+  }
+  
+  let style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes fall {
+      to { transform: translate(var(--x), var(--y)); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+</script>
 
 </body>
 </html>
